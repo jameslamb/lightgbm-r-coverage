@@ -14,6 +14,11 @@ args <- commandArgs(
 LIGHTGBM_SOURCE <- args[[1]]
 
 path <- file.path(LIGHTGBM_SOURCE, "lightgbm_r")
+TMP_LIB <- file.path(
+    Sys.getenv("HOME")
+    , "Desktop"
+    , "8e3dc0c5-dd74-44c1-b4e8-db1f166f6ae6"
+)
 type <- c("tests", "vignettes", "examples", "all", "none")
 combine_types <- TRUE
 relative_path <- TRUE
@@ -29,6 +34,36 @@ if (!dir.exists(path)){
             "export CXX=/usr/local/bin/g++-8 CC=/usr/local/bin/gcc-8; cd '{LIGHTGBM_SOURCE}' && Rscript build_r.R"
         )
     )
+} else {
+    print("copying test files to the location instrumented for coverage")
+    test_files <- list.files(
+        path = file.path(LIGHTGBM_SOURCE, "R-package", "tests", "testthat")
+        , pattern = "*test.*\\.R$"
+        , full.names = TRUE
+        , include.dirs = FALSE
+    )
+    for (test_file in test_files){
+        file.copy(
+            from = test_file
+            , to = file.path(
+                TMP_LIB
+                , "lightgbm"
+                , "lightgbm-tests"
+                , "testthat"
+            )
+            , overwrite = TRUE
+        )
+        file.copy(
+            from = test_file
+            , to = file.path(
+                TMP_LIB
+                , "lightgbm"
+                , "tests"
+                , "testthat"
+            )
+            , overwrite = TRUE
+        )
+    }
 }
 
 pkg <- covr:::as_package(path)
@@ -36,7 +71,7 @@ type <- "tests"
 type <- covr:::parse_type(type)
 run_separately <- !isTRUE(combine_types) && length(type) > 1
 
-tmp_lib <- file.path(Sys.getenv("HOME"), "Desktop", "8e3dc0c5-dd74-44c1-b4e8-db1f166f6ae6")
+tmp_lib <- TMP_LIB
 if (!dir.exists(tmp_lib)){
     dir.create(tmp_lib)
 }

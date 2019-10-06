@@ -41,3 +41,11 @@ rm -rf $(pwd)/LightGBM/lightgbm_r
 rm -rf ${HOME}/Desktop/8e3dc0c5-dd74-44c1-b4e8-db1f166f6ae6
 Rscript r_coverage.R $(pwd)/LightGBM
 ```
+
+## Coverage changes from successive attempts
+
+1 - 56.37%
+2 - 60.80%
+3 - 62.34%
+4 - 65.48%
+5 - 
