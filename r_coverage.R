@@ -36,7 +36,7 @@ type <- "tests"
 type <- covr:::parse_type(type)
 run_separately <- !isTRUE(combine_types) && length(type) > 1
 
-tmp_lib <- file.path(Sys.getenv("HOME"), "Desktop", "whatever")
+tmp_lib <- file.path(Sys.getenv("HOME"), "Desktop", "8e3dc0c5-dd74-44c1-b4e8-db1f166f6ae6")
 if (!dir.exists(tmp_lib)){
     dir.create(tmp_lib)
 }
