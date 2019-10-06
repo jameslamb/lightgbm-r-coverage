@@ -1,0 +1,6 @@
+
+LightGBM/
+
+# files generated when making coverage report
+*.html
+**/lib/
