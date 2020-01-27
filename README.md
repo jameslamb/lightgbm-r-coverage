@@ -1,3 +1,7 @@
+# THIS REPO HAS BEEN ARCHIVED
+
+This repository is no longer necessary, as of [microsoft/LightGBM#2664](https://github.com/microsoft/LightGBM/pull/2664).
+
 # lightgbm-r-coverage
 
 Scripts for measuring the unit test coverage of the code in [LightGBM's R package](https://github.com/microsoft/LightGBM/tree/master/R-package).
